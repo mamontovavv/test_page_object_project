@@ -1,2 +1,2 @@
 # test_page_object_project
-Test Page Object project
+ Применение паттерна Page Object Model - 4 раздел курса https://stepik.org/course/575/syllabus
