@@ -20,11 +20,29 @@ class BasePage():
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    def are_no_products_in_basket(self, how, what,timeout=1):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+        return False
+
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
+    def go_to_basket_page(self):
+        button = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        button.click()
+
     def is_element_present(self, how, what):
+        try:
+            self.browser.find_element(how, what)
+        except (NoSuchElementException):
+            return False
+        return True
+
+    def is_message_about_empty_basket(self, how, what):
         try:
             self.browser.find_element(how, what)
         except (NoSuchElementException):
@@ -66,4 +84,7 @@ class BasePage():
         except NoAlertPresentException:
             print("No second alert presented")
 
+   
+
+    
    
